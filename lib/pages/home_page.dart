@@ -16,7 +16,6 @@ class _HomePageState extends State<HomePage> {
 
   var alturaController = TextEditingController();
   var pesoController = TextEditingController();
-  String dia = '';
   var _listaIMC = const <Imc>[];
   double peso = 0.0;
   double altura = 0.0;

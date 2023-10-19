@@ -14,11 +14,11 @@ class Imc extends HiveObject {
   double _peso = 0.0;
 
   @HiveField(3)
-  final DateTime _data = DateTime.now();
+  final DateTime _data;
 
-  Imc();
+  Imc() : _data = DateTime.now();
 
-  Imc.criar(this._altura, this._peso);
+  Imc.criar(this._altura, this._peso) : _data = DateTime.now();
 
   String get id => _id;
 
