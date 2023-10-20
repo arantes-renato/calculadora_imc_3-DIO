@@ -1,5 +1,4 @@
 import 'package:calculadora_imc3/repository/imc_repository.dart';
-import 'package:calculadora_imc3/services/notificacao.dart';
 import 'package:calculadora_imc3/shared/widgets/texto.dart';
 import 'package:calculadora_imc3/shared/widgets/imc.dart';
 import 'package:flutter/material.dart';
@@ -140,7 +139,7 @@ class _HomePageState extends State<HomePage> {
                               return Dismissible(
                                 onDismissed:
                                     (DismissDirection dismissDirection) {
-                                  //imcRepository.removerIMC(imc.id);
+                                  imcRepository.remover(imc);
                                   obterIMC();
                                 },
                                 key: Key(imc.id),

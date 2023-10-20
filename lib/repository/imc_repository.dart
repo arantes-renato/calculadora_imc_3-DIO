@@ -19,6 +19,10 @@ class ImcRepository {
     _box.add(imc);
   }
 
+  remover(Imc imc) {
+    imc.delete();
+  }
+
   List<Imc> obterLista() {
     return _box.values.cast<Imc>().toList();
   }
