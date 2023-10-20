@@ -7,16 +7,12 @@ class ImcRepository {
   ImcRepository._criar();
 
   static Future<ImcRepository> carregar() async {
-    if (Hive.isBoxOpen('IMC')) {
-      _box = Hive.box('IMC');
+    if (Hive.isBoxOpen('IMC_box')) {
+      _box = Hive.box('IMC_box');
     } else {
-      _box = await Hive.openBox('IMC');
+      _box = await Hive.openBox('IMC_box');
     }
     return ImcRepository._criar();
-  }
-
-  remover(Imc imc) {
-    imc.delete();
   }
 
   salvar(Imc imc) {

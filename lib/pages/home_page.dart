@@ -1,4 +1,5 @@
 import 'package:calculadora_imc3/repository/imc_repository.dart';
+import 'package:calculadora_imc3/services/notificacao.dart';
 import 'package:calculadora_imc3/shared/widgets/texto.dart';
 import 'package:calculadora_imc3/shared/widgets/imc.dart';
 import 'package:flutter/material.dart';
@@ -12,15 +13,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late ImcRepository imcReposistory;
-
+  late ImcRepository imcRepository;
   var alturaController = TextEditingController();
   var pesoController = TextEditingController();
-  var _listaIMC = const <Imc>[];
+  var _listaIMC = <Imc>[];
   double peso = 0.0;
   double altura = 0.0;
   double mediaIMC = 0.0;
-  Widget mensagem = Container();
 
   @override
   void initState() {
@@ -29,8 +28,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   void obterIMC() async {
-    imcReposistory = await ImcRepository.carregar();
-    _listaIMC = imcReposistory.obterLista();
+    imcRepository = await ImcRepository.carregar();
+    _listaIMC = imcRepository.obterLista();
     if (_listaIMC.length > 1) {
       mediaIMC =
           _listaIMC.map((imc) => imc.calcularIMC()).reduce((a, b) => a + b) /
@@ -81,7 +80,8 @@ class _HomePageState extends State<HomePage> {
                                     .replaceAll(',', '.')
                                     .replaceAll('.', '')) ??
                                 0.0;
-                            imcReposistory.salvar(Imc.criar(altura, peso));
+                            imcRepository
+                                .salvar(Imc(altura, peso, DateTime.now()));
                             Navigator.of(context).pop();
                             obterIMC();
                           },
@@ -140,7 +140,7 @@ class _HomePageState extends State<HomePage> {
                               return Dismissible(
                                 onDismissed:
                                     (DismissDirection dismissDirection) {
-                                  imcReposistory.remover(imc);
+                                  //imcRepository.removerIMC(imc.id);
                                   obterIMC();
                                 },
                                 key: Key(imc.id),

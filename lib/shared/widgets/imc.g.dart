@@ -16,9 +16,11 @@ class ImcAdapter extends TypeAdapter<Imc> {
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Imc()
-      .._altura = fields[1] as double
-      .._peso = fields[2] as double;
+    return Imc(
+      fields[1] as double,
+      fields[2] as double,
+      fields[3] as DateTime,
+    );
   }
 
   @override

@@ -8,17 +8,15 @@ class Imc extends HiveObject {
   final String _id = UniqueKey().toString();
 
   @HiveField(1)
-  double _altura = 0.0;
+  double _altura;
 
   @HiveField(2)
-  double _peso = 0.0;
+  double _peso;
 
   @HiveField(3)
-  final DateTime _data;
+  DateTime _data;
 
-  Imc() : _data = DateTime.now();
-
-  Imc.criar(this._altura, this._peso) : _data = DateTime.now();
+  Imc(this._altura, this._peso, this._data);
 
   String get id => _id;
 
